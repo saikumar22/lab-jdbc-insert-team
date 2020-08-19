@@ -1,24 +1,31 @@
 package model;
 
-public class City{
-	int cityid;
-	String cityname;
-	public int getCityid() {
-		return cityid;
+public class City {
+	private long cityID;
+	private String cityName;
+	
+	
+	public City(int id, String cityName) {
+		this.cityID=id;
+		this.cityName=cityName;
 	}
-	public void setCityid(int cityid) {
-		this.cityid =  cityid;
-	}
-	public String getCityname() {
-		return cityname;
-	}
-	public void setCityname(String cityname) {
-		this.cityname = cityname;
-	}
-	public City(int cityid, String cityname) {
-		super();
-		this.cityid = cityid;
-		this.cityname = cityname;
+	public City() {
+		// TODO Auto-generated constructor stub
 	}
 
+
+	public long getCityID() {
+		return cityID;
+	}
+	public void setCityID(long city_id) {
+		this.cityID = city_id;
+	}
+
+
+	public String getCityName() {
+		return cityName;
+	}
+	public void setCityName(String cityName) {
+		this.cityName = cityName;
+	}	
 }

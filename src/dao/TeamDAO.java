@@ -1,24 +1,38 @@
 package dao;
 
 import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.Statement;
 
+import model.City;
 import model.Team;
 import utility.ConnectionManager;
 
+@SuppressWarnings("unused")
 public class TeamDAO{
-public void createTeam(Team team) throws ClassNotFoundException, SQLException {
-		
-		String sql="INSERT INTO TEAM VALUES(?,?,?,?,?)";
+	public void createTeam(Team team)throws Exception {
+		System.out.println("Create team dao");
+		Statement stmt = ConnectionManager.getConnection().createStatement();
+		long id = team.getID();
+		String name=team.getName();
+		String coach=team.getCoach();
+		//long home_city=team.getHome_city();
+		long city=team.getCity().getCityID();
+		ConnectionManager cm=new ConnectionManager();
+		String sql1="INSERT INTO CITY VALUES ("+team.getCity().getCityID()+","+"'"+team.getCity().getCityName()+"'"+")";
+	    int i=stmt.executeUpdate(sql1);
+        
+	String sql="Insert into TEAM(ID,NAME,COACH,HOME_CITY) VALUES(?,?,?,?)";
+	
 		PreparedStatement st=ConnectionManager.getConnection().prepareStatement(sql);
-		st.setInt(1, team.getId());
-		st.setString(2, team.getName());
-		st.setString(3, team.getCoach());
-		st.setInt(4, team.getHome_city());
-		st.setInt(5, team.getCaptain());
+		st.setLong(1, id);
+		st.setString(2, name);
+		st.setString(3, coach);
+		st.setLong(4, city);
+		System.out.println("established");
 		
-		int x = st.executeUpdate();
-		
+		int x =st.executeUpdate();
 		System.out.println(x);
+		
+		//ConnectionManager.getConnection().close();  
 	}
-}
+} 
